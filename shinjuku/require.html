@@ -1,0 +1,236 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>新宿大学公式サイト</title>
+<link rel="stylesheet" href="../css/require.css">
+<script src="../javascript/jquery-3.4.1.min.js"></script>
+<script src="../javascript/jquery_require.js"></script>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js"></script>
+</head>
+<body>
+ <header>
+  <p class="scrollTop">TOPへ<br>戻る</p>
+  <div id="headerInner">
+    <h1><a href="../index.html"><img src="../images/logo.png" alt="ロゴ"><span>新宿大学</span></a></h1>
+     <nav id="nav1">
+      <ul class="dropdown">
+       <li>
+        対象者別▼
+        <ul>
+         <li><a href="#">受験生の方</a></li>
+         <li><a href="#">在学生の方</a></li>
+         <li><a href="#">卒業生の方</a></li>
+         <li><a href="#">保護者の方</a></li>
+         <li><a href="#">企業の方</a></li>
+         <li><a href="#">メディアの方</a></li>
+        </ul>
+       </li>
+       <li>
+        施設案内
+        <ul>
+         <li><a href="#">大学本部</a></li>
+         <li><a href="#">1号館～15号館</a></li>
+         <li><a href="#">図書館</a></li>
+         <li><a href="#">体育館/総合グラウンド</a></li>
+         <li><a href="#">食堂</a></li>
+         <li><a href="#">メインホール</a></li>
+         <li><a href="#">就職キャリアセンター</a></li>
+         <li><a href="#">心理相談所</a></li>
+        </ul>
+       </li>
+       <li>
+        アクセス
+        <ul>
+         <li><a href="#">アクセスマップ</a></li>
+        </ul>
+       </li>
+       <li>
+        資料請求
+        <ul>
+         <li><a href="#">WEBから</a></li>
+         <li><a href="#">お電話から</a></li>
+        </ul>
+       </li>
+      </ul>
+     </nav>
+  </div>
+ </header>
+ <main>
+  <div class="require_bg"></div>
+  <div id="requireInner">
+   <div class="heading">
+    <h2>資料請求入力フォーム</h2>
+    <p><a href="../index.html">HOME</a>ー<span>資料請求ーWEBから</span></p>
+   </div>
+   <div class="step">
+    <ul>
+     <li>01.お取り寄せ情報入力</li>
+     <li>02.入力情報の確認</li>
+     <li>03.送信完了</li>
+    </ul>
+   </div>
+   <p>本大学に興味をお持ちの方には、下記のフォームに入力して送信いただくと無料で大学のパンフレットをお送りします。</p>
+   <form action="../PHP/db_insert.php" method="post">
+    <table>
+     <tr>
+      <th colspan="2">氏名(全角) <strong>必須</strong></th>
+      <td>
+       <span>&emsp;姓<input name="FamilyName" type="text" value="" placeholder="例)資料"></span>
+       <span>&emsp;&emsp;名<input name="FirstName" type="text" value="" placeholder="例)太郎"></span>
+      </td>
+     </tr>
+     <tr>
+      <th colspan="2">カナ(全角) <strong>必須</strong></th>
+      <td>
+       <span>セイ<input name="KanaFamilyName" type="text" value="" placeholder="例)シリョウ"></span>
+       <span>&emsp;メイ<input name="KanaFirstName" type="text" value="" placeholder="例)タロウ"></span>
+      </td>
+     </tr>
+     <tr>
+      <th colspan="2">性別 <strong>必須</strong></th>
+      <td>
+       <span><label><input name="gender" type="radio" value="man">男</label></span>
+       <span><label><input name="gender" type="radio" value="woman">女</label></span>
+      </td>
+     </tr>
+     <tr>
+      <th colspan="2">生年月日</th>
+      <td>
+        <select id="year" name="year">
+         <option label=" "></option>
+        </select>年&emsp;
+        <select id="month" name="month">
+         <option label=" "></option>
+        </select>月&emsp;
+        <select id="day" name="day">
+         <option label=" "></option>
+        </select>日
+      </td>
+     </tr>
+     <tr>
+      <th colspan="2">郵便番号(半角数字) <strong>必須</strong></th>
+      <td>
+       〒&emsp;
+       <input name="PostalCode1" type="text" value="" maxlength="3" size="4" onKeyUp="AjaxZip3.zip2addr('PostalCode1', 'PostalCode2', 'prefecture', 'city');" placeholder="例)123">
+       &emsp;‐&emsp;
+       <input name="PostalCode2" type="text" value="" maxlength="4" size="5" onKeyUp="AjaxZip3.zip2addr('PostalCode1', 'PostalCode2', 'prefecture', 'city');" placeholder="例)4567">
+      </td>
+     </tr>
+     <tr>
+      <th rowspan="4">住所</th>
+      <th>都道府県 <strong>必須</strong></th>
+      <td>
+       <span>
+        <select id="prefecture" name="prefecture">
+         <option label="　"></option>
+        </select>
+       </span>
+      </td>
+     </tr>
+     <tr>
+      <th>市区町村(全角) <strong>必須</strong></th>
+      <td><input name="city" type="text" value="" size="70" placeholder="例)資料市請求区"></td>
+     </tr>
+     <tr>
+      <th>番地(全角) <strong>必須</strong></th>
+      <td><input name="area" type="text" value="" size="70" placeholder="例)１－２－３"></td>
+     </tr>
+     <tr>
+      <th>建物名・部屋番号(全角)</th>
+      <td><input name="room" type="text" value="" size="70" placeholder="例)コーポシリョウ１０１"></td>
+     </tr>
+     <tr>
+      <th colspan="2">電話番号(半角数字) <strong>必須</strong></th>
+      <td>
+       <span>
+        <input name="tel1" type="text" value="" size="5" maxlength="4" placeholder="例)090">‐
+        <input name="tel2" type="text" value="" size="5" maxlength="4" placeholder="例)1234">‐
+        <input name="tel3" type="text" value="" size="5" maxlength="4" placeholder="例)5678">
+       </span>
+      </td>
+     </tr>
+     <tr>
+      <th colspan="2">メールアドレス(半角) <strong>必須</strong></th>
+      <td><input name="email" type="text" value="" size="70" placeholder="例)shiryou@seikyu.co.jp"></td>
+     </tr>
+     <tr>
+      <th colspan="2">ご希望の資料(複数選択可) <strong>必須</strong></th>
+      <td style="text-align:left;">
+       <label><input name="shiryou[]" type="checkbox" value="学部案内">大学の学部案内</label><br>
+       <label><input name="shiryou[]" type="checkbox" value="大学院の学部案内">大学院の学部案内</label><br>
+       <label><input name="shiryou[]" type="checkbox" value="学部の編入案内">学部の編入案内</label><br>
+       <label><input name="shiryou[]" type="checkbox" value="外国人留学生へのご案内">外国人留学生へのご案内</label>
+      </td>
+     </tr>
+     <tr>
+      <td id="submit" colspan="3"><input name="submit" type="submit" value="確認画面へ"></td>
+     </tr>
+    </table>
+    <input type="hidden" name="mode" value="insert">
+   </form>
+   <div class="tel">
+    <p>お電話での資料請求も承っております。</p>
+    <p><a href="#">03-XXXX-XXXX</a>までお問い合わせください。(受付時間/平日10:00～18:00)</p>
+   </div>
+  </div>
+ </main>
+ <footer>
+  <div id="footerInner">
+   <div id="logo_f">
+    <a href="../index.html"><img src="../images/logo.png" alt="ロゴ"><span>新宿大学</span></a>
+    <div id="banner">
+     <a href="#"><img id="Facebook" src="../images/facebook_banner.png" alt="Facebook"></a>
+     <a href="#"><img id="Messanger" src="../images/messenger_banner.png" alt="Messenger"></a>
+    </div>
+   </div>
+   <div id="banner_smapho">
+    <a href="#"><img id="Facebook_smapho" src="../images/facebook_banner.png" alt="Facebook"></a>
+    <a href="#"><img id="Meesenger_smapho" src="../images/messenger_banner.png" alt="Messenger"></a>
+   </div>
+    <nav id="nav3">
+     <ul>
+      <li><a href="../html/feature.html">大学の特色</a></li>
+      <li><a href="#">学部・学科一覧</a></li>
+      <li><a href="#">大学院一覧</a></li>
+      <li><a href="#">施設一覧</a></li>
+      <li><a href="#">アクセス</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">サークル活動</a></li>
+      <li><a href="#">留学</a></li>
+      <li><a href="#">国際交流</a></li>
+      <li><a href="#">心理相談</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">進路相談</a></li>
+      <li><a href="#">就職情報</a></li>
+      <li><a href="#">インターンシップ</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">学部入試情報</a></li>
+      <li><a href="#">大学院入試情報</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">受験生の方</a></li>
+      <li><a href="#">在学生の方</a></li>
+      <li><a href="#">卒業生の方</a></li>
+      <li><a href="#">保護者の方</a></li>
+      <li><a href="#">企業の方</a></li>
+      <li><a href="#">メディアの方</a></li>
+     </ul>
+    </nav>
+    <div id="footer_inner">
+     <p><a href="#">採用情報</a></p>
+     <p><a href="#">資料請求</a></p>
+     <p><a href="#">お問い合わせ</a></p>
+    </div>
+    <div id="footer_inner2">
+     <p><a href="#">このサイトについて</a></p>
+     <p><a href="#">プライバシーポリシー</a></p>
+    </div>
+    <p id="Copyright">Copyright&copy; Shinjuku University.All rights reserved.</p>
+  </div>
+ </footer>
+</body>
+</html>
