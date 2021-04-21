@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無題ドキュメント</title>
+<style>
+  body{
+    font-family: serif;
+    background: #000;
+    margin: 0 auto 0 auto;
+  }
+
+  #plan{
+    margin-top: 4.8vh;
+  }
+
+  #plan > p{
+    color: #fff;
+    font-size: calc(24/1536 * 100vw);
+    background: #4d4d4d;
+    width: 100%;
+    height: 9.22vh;
+    line-height: 9.22vh;
+  }
+
+  #plan > div{
+    width: calc(100% - 1.4vw);
+    background: #fff;
+    margin-top: -3.1vh;
+    padding-top: 3.46vh;
+    padding-left: 1.4vw;
+    padding-bottom: 3.46vh;
+  }
+
+  #plan > div > div{
+    display: flex;
+    font-size: calc(16/1536 * 100vw);
+  }
+
+  #plan > div > div span{
+    font-size: calc(18/1536 * 100vw);
+  }
+
+  table{
+    width: 50%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: left;
+  }
+
+  th,td{
+    border-top: solid 1px;
+  }
+
+  .photo{
+    width: 50%;
+    margin: 0 auto 0 auto;
+    text-align: center;
+  }
+
+  .photo a{
+    color: #fff;
+    background: #236fee;
+    text-decoration: none;
+    display: block;
+    width: 13.3vw;
+    height: 6.06vh;
+    margin: 0 auto 0 auto;
+    line-height: 6.06vh;
+    opacity: 0.9;
+    transition: all .5s ease;
+  }
+
+  .photo a:hover{
+    font-weight: bold;
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div id="plan">
+    <p>!plan_name!</p>
+    <div>
+      <span>●プランの詳細</span>
+      <div>
+        <table>
+          <tr>
+            <th>チェックイン</th>
+            <td>!checkin!</td>
+          </tr>
+          <tr>
+            <th>チェックアウト</th>
+            <td>!checkout!</td>
+          </tr>
+          <tr>
+            <th>お食事</th>
+            <td>!meal!</td>
+          </tr>
+          <tr>
+            <th>プラン紹介</th>
+            <td>!plan!</td>
+          </tr>
+          <tr>
+            <th>キャンセル料</th>
+            <td>当日/100%<br>3日前から/50%</td>
+          </tr>
+          <tr>
+            <th>宿泊料金:</th>
+            <td>\!charge!</td>
+          </tr>
+        </table>
+        <div class="photo">
+          <img src="../html/images/!image!" alt="プランごとの画像">
+          <a href="#">このプランを予約する</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
