@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>お絵描きアプリ</title>
+<style>
+ul{
+ list-style-type:none;
+ float:left;
+}
+
+#cv{
+ border:solid 1px #000;
+ margin-top:20px;
+ margin-left:50px;
+ clear:both;
+}
+</style>
+<script type="text/javascript">
+window.addEventListener('DOMContentLoaded',function(){
+ if(HTMLCanvasElement){
+  var cv=document.querySelector('#cv');
+  var c=cv.getContext('2d');
+  var tool=0;
+  var startX;
+  var startY;
+  var endX;
+  var endY;
+
+  document.getElementById('thickness').addEventListener('change',function(){
+   var line_width = document.fm.slc.options[document.fm.slc.selectedIndex].value;
+   c.lineWidth = line_width;
+  });
+
+  document.getElementById('square').addEventListener('click',function(e){
+   tool=0;
+  });
+
+  document.getElementById('line').addEventListener('click',function(e){
+   tool=1;
+  });
+
+  document.getElementById('erase').addEventListener('click',function(e){
+   tool=2;
+  });
+
+  cv.addEventListener('mousedown',function(e){
+   var rect=e.target.getBoundingClientRect();
+   startX=e.clientX-rect.left;
+   startY=e.clientY-rect.top;
+   if(tool===0){
+    cv.addEventListener('mousemove',draw_square);
+   }
+   if(tool===1){
+    c.beginPath();
+    cv.addEventListener('mousemove',draw_free);
+   }
+   if(tool===2){
+    c.beginPath();
+    cv.addEventListener('mousemove',erase);
+   }
+  });
+
+  function draw_square(e){
+   var rect = e.target.getBoundingClientRect();
+   endX=e.clientX-rect.left;
+   endY=e.clientY-rect.top;
+   cv.addEventListener('mouseup',end_square);
+  }
+
+  function end_square(e){
+   c.strokeRect(startX,startY,endX-startX,endY-startY);
+   document.getElementById('fillcolor').addEventListener('click',function(){
+    c.fillRect(startX,startY,endX-startX,endY-startY);
+   });
+   cv.removeEventListener('mousemove',draw_square);
+   cv.removeEventListener('mouseup',end_square);
+  }
+
+  function draw_free(e){
+   var rect = e.target.getBoundingClientRect();
+   endX=e.clientX-rect.left;
+   endY=e.clientY-rect.top;
+   c.lineTo(endX,endY);
+   c.stroke();
+   cv.addEventListener('mouseup',function(e){
+    cv.removeEventListener('mousemove',draw_free);
+   });
+  }
+
+  document.getElementById('color').addEventListener('change',function(e){
+   c.strokeStyle=e.target.value;
+   c.fillStyle=e.target.value;
+  });
+
+  function erase(e){
+   var rect = e.target.getBoundingClientRect();
+   endX=e.clientX-rect.left;
+   endY=e.clientY-rect.top;
+   c.lineTo(endX,endY);
+   c.strokeStyle = 'white';
+   c.stroke();
+   cv.addEventListener('mouseup',function(e){
+    cv.removeEventListener('mousemove',erase);
+   });
+  }
+
+  document.getElementById('delete').addEventListener('click',function(){
+   c.clearRect(0,0,cv.width,cv.height);
+  });
+
+  document.getElementById('save').addEventListener('click',function(){
+   var img=new Image();
+   img.src=cv.toDataURL("image/png");
+   //var dataURL=cv.toDataURL("image/png");
+   //window.location=dataURL;
+   window.location=img.src;
+  });
+ }
+});
+</script>
+</head>
+<body>
+ <form name="fm">
+  <span>線の太さ</span>
+  <select id="thickness" name="slc">
+   <option>1</option>
+   <option>2</option>
+   <option>3</option>
+   <option>4</option>
+   <option>5</option>
+   <option>6</option>
+   <option>7</option>
+   <option>8</option>
+   <option>9</option>
+   <option>10</option>
+  </select>
+ </form>
+ <ul>
+  <li><input id="square" type="button" value="四角形"></li>
+  <li><input id="fillcolor" type="button" value="塗りつぶし"></li>
+  <li><input id="line" type="button" value="線引き"></li>
+  <li><input id="color" type="color" value="色の変更"></li>
+  <li><input id="erase" type="button" value="消しゴム"></li>
+  <li><input id="delete" type="button" value="削除"></li>
+  <li><input id="save" type="button" value="保存"></li>
+ </ul>
+ <canvas id="cv" width="500" height="500"></canvas>
+</body>
+</html>

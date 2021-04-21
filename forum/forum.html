@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+body{
+ background-color: #f5deb3;
+}
+
+#reply_id{
+ border: #f5deb3;
+ background-color: #f5deb3;
+}
+</style>
+</head>
+<body>
+ <form action="forum.php" method="post">
+  <div >
+   <textarea id="reply_id" name="reply_id" rows="1" cols="1" readonly>>>!id!</textarea>
+   <p>題名</p>
+   <input type="text" name="title" value="" placeholder="題名">
+  </div>
+  <div>
+   <p>コメント</p>
+   <textarea name="comment" rows="8" cols="60" placeholder="コメントを入力してください。"></textarea>
+  </div>
+  <input type="submit" value="投稿する">
+  <input type="hidden" name="mode" value="contribution">
+ </form>
+</body>
+</html>

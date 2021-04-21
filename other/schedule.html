@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>scheduleアプリ</title>
+<style type="text/css">
+#stime,#ftime,#rem{
+ margin-left:20px;
+}
+
+table{
+ margin-left:50px;
+ width:1000px;
+ margin-top:50px;
+ border:solid 1px #000;
+ border-collapse:collapse;
+ background-color:pink;
+}
+
+td{
+ border:solid 1px #000;
+ text-align:center;
+ font-weight:bold;
+}
+
+#content,#remark{
+ text-align:left;
+ background-color:#FFF;
+}
+
+#start,#finish,#edit,#delete{
+ text-align:center;
+ background-color:#FFF;
+}
+</style>
+<script type="text/javascript">
+window.addEventListener('DOMContentLoaded',function(){
+ //開始時間(時)の選択候補の作成
+ var stime_h = document.getElementById('stime_h');
+ for(var i = 0; i < 24; i++){
+  var opt_sh = document.createElement('option');
+  opt_sh.innerHTML = i;
+  stime_h.appendChild(opt_sh);
+ }
+ //作成終了
+ //開始時間(分)の選択候補の作成
+ var stime_m = document.getElementById('stime_m');
+ for(var i = 0; i < 10; i++){
+  var opt_sm = document.createElement('option');
+  var od_sm = "0";
+  od_sm += i;
+  opt_sm.innerHTML = od_sm;
+  stime_m.appendChild(opt_sm);
+ }
+ for( var i = 10; i < 60; i++){
+  var opt_sm = document.createElement('option');
+  opt_sm.innerHTML = i;
+  stime_m.appendChild(opt_sm);
+ }
+ //作成終了
+ //終了時間(時)の選択候補の作成
+ var ftime_h = document.getElementById('ftime_h');
+ var opt_fh = document.createElement('option');
+ ftime_h.appendChild(opt_fh);
+ for(var i = 0; i < 24; i++){
+  var opt_fh = document.createElement('option');
+  opt_fh.innerHTML = i;
+  ftime_h.appendChild(opt_fh);
+ }
+ //作成終了
+ //終了時間(分)の選択候補の作成
+ var ftime_m = document.getElementById('ftime_m');
+ for(var i = 0; i < 10; i++){
+  var opt_fm = document.createElement('option');
+  var od_fm = "0";
+  od_fm += i;
+  opt_fm.innerHTML = od_fm;
+  ftime_m.appendChild(opt_fm);
+ }
+ for(var i =10; i < 60; i++){
+  var opt_fm = document.createElement('option');
+  opt_fm.innerHTML = i;
+  ftime_m.appendChild(opt_fm);
+ }
+ //作成終了
+ document.getElementById('date_upload').addEventListener('click',function(){ //日付の更新ボタンをクリックするとページ全体がリロードされる。
+  window.location.reload();
+ });
+ if(localStorage){
+  document.getElementById('insert').addEventListener('click',register); //登録ボタンをクリックするとテーブルに入力データを表記する関数registerが実行される。関数registerの詳細は以降に記載。
+  getlist(); //リロード時に既にwebストレージに保存したデータがテーブルに表示されるように、getlist()を記載する。関数getlist()の詳細は以降に記載。
+  var calendar = document.fm.date.value;
+  calendar.addEventListener('change',getlist()); //日付が変わったらwebストレージに保存したデータをテーブルに表示するために、関数getlist()を実行する。
+ }
+});
+
+//テーブルに入力データを表記する関数registerの詳細。
+function register(){
+ var storage = localStorage;
+ var calendar = document.fm.date.value;
+ var item = JSON.parse(storage.getItem(calendar)); //calendar、すなわち日付の値をwebストレージにおけるキーとする。
+//webストレージに保存したデータを取り出し、それらを配列化して変数itemに受け渡す。
+//ただし、最初は当然何もwebストレージに保存されてないため初期段階のitemは空の配列とする。
+
+ if(item === null){
+  item = [];
+ }
+
+ //件名、開始時間、終了時間、備考にそれぞれ指定した内容をハイフン(-)で連結して、変数insに受け渡す。
+ var txt = document.fm.txt.value;
+
+ //開始時間については、時・分の単位の値を「:」で連結する。
+ var sTime_H_pre = document.fm.stime_h;
+ var sTime_H = sTime_H_pre.options[sTime_H_pre.selectedIndex].value;
+ var sTime_M_pre = document.fm.stime_m;
+ var sTime_M = sTime_M_pre.options[sTime_M_pre.selectedIndex].value;
+ var sTime = sTime_H + ':' + sTime_M;
+
+ //終了時間についても、同様に時・分の単位の値を「:」で連結する。
+ var fTime_H_pre = document.fm.ftime_h;
+ var fTime_H = fTime_H_pre.options[fTime_H_pre.selectedIndex].value;
+ var fTime_M_pre = document.fm.ftime_m;
+ var fTime_M = fTime_M_pre.options[fTime_M_pre.selectedIndex].value;
+ var fTime = fTime_H + ':' + fTime_M;
+
+ var comment = document.fm.comment.value;
+
+ var ins = txt + '-' + sTime + '-' + fTime + '-' + comment;
+
+ //件名と開始時間、終了時間が指定されてない場合および時間の指定が不正の場合は、その旨を配列err_msgに格納する。
+ var err_msg = [];
+
+ if(calendar === ''){
+  err_msg.push('日付を指定してください。');
+ }
+
+ if(txt === ''){
+  err_msg.push('件名を入力してください。');
+ }
+
+ //時間比較のために、第1段階としてselectタグで選択された時間から「:」を除去する。
+ //例)9:30 ⇒ 930
+ var sTime_sepa = sTime.split(':');
+ var sTime_cone = sTime_sepa[0] + sTime_sepa[1];
+ var fTime_sepa = fTime.split(':');
+ var fTime_cone = fTime_sepa[0] + fTime_sepa[1];
+
+ //第2段階として「:」を除去された時間を数値化する。
+ //※sekectタグで選択された値は文字列のため、時間を比較するには数値化する必要がある。
+ var sTime_val = parseFloat(sTime_cone);
+ var fTime_val = parseFloat(fTime_cone);
+
+ if(sTime_H === '' || sTime_M === ''){
+  err_msg.push('開始時間を選択してください。');
+ }
+ if(fTime_H === '' || fTime_M === ''){
+  err_msg.push('終了時間を選択してください。');
+ }
+ else if(sTime_val >= fTime_val){
+  err_msg.push('終了時間は開始時間より後の時間を選択してください。');
+ }
+
+ //配列err_msgに少なくとも1つ値が格納されている場合、すなわち指定されてない項目がある場合や時間の指定が不正な場合はアラートを出力する。
+ if(err_msg.length !== 0){
+  alert(err_msg);
+  return;
+ }
+
+ //変数insの値を配列itemsに格納し、itemsを文字列化してwebストレージにデータを保存する。
+ //その後は新規でwebストレージに保存されたデータや既に保存してあるデータを取り出し、テーブルに表記する関数getlist()を実行する。
+ item.push(ins);
+ storage.setItem(calendar,JSON.stringify(item));
+ getlist();
+}
+
+//webストレージ内のデータを取り出してテーブルに表記する関数getlist()の詳細。
+function getlist(){
+ var result = '';
+ var storage = localStorage;
+ var calendar = document.fm.date.value;
+ var item = JSON.parse(storage.getItem(calendar));
+
+ //webストレージ内のデータをすべて取り出し、空の変数resultに追加で受け渡す。
+ for(var i = 0; i < item.length; i++){
+  if(item[i] !== null){
+   var item_sepa = item[i].split('-');
+   result += '<tr>';
+   result += '<td id="content">' + item_sepa[0] + '</td>';
+   result += '<td id="start">' + item_sepa[1] + '</td>';
+   result += '<td id="finish">' + item_sepa[2] + '</td>';
+   result += '<td id="remark">' + item_sepa[3] + '</td>';
+   result += '<td id="edit"><input type="button" value="編集" onclick="editItem('+i+')"/></td>';
+   result += '<td id="delete"><input type="button" value="削除" onclick="deleteItem('+i+')"/></td>';
+   result += '</tr>';
+  }
+ }
+ document.getElementById('data').innerHTML = result; //webストレージ内のデータがすべて格納された変数resultの中身をテーブルに表記する。
+ //テーブルに表記すると同時に件名、開始時間、終了時間、備考をそれぞれ空欄にする。(見栄えのため)
+ document.fm.txt.value = "";
+ document.fm.stime_h.value = "";
+ document.fm.stime_m.value = "";
+ document.fm.ftime_h.value = "";
+ document.fm.ftime_m.value = "";
+ document.fm.comment.value = "";
+}
+
+//テーブルの上からi番目のデータを編集する関数editItem(i)の詳細。
+function editItem(i){
+ var storage = localStorage;
+ var calendar = document.fm.date.value;
+ var item = JSON.parse(storage.getItem(calendar));
+
+ //itemsに格納された変数insの値(件名、開始時間、終了時間、備考)をハイフンで分割して
+ //ブラウザ画面上の件名、開始時間、終了時間、備考にそれぞれの値を受け渡す。
+ //すなわち、i番目のデータを件名、開始時間、終了時間、備考にそれぞれ指定する。
+ var item_sepa = item[i].split('-');
+
+ document.fm.txt.value = item_sepa[0];
+
+ //開始時間と終了時間は「:」で連結されているため、「:」で分割する。
+ var sTime_sepa = item_sepa[1].split(':');
+ document.fm.stime_h.value = sTime_sepa[0];
+ document.fm.stime_m.value = sTime_sepa[1];
+
+ var fTime_sepa = item_sepa[2].split(':');
+ document.fm.ftime_h.value = fTime_sepa[0];
+ document.fm.ftime_m.value = fTime_sepa[1];
+
+ document.fm.comment.value = item_sepa[3];
+
+ //編集後に再度登録ボタンをクリックすると、編集されたデータがテーブルに再登録されるだけでなく
+ //編集前のデータが削除される。それは編集前のデータと編集後のデータが混在することを避けるためである。
+ document.getElementById('insert').addEventListener('click',function(){
+  deleteItem(i); //テーブルの上からi番目のデータを削除する関数deleteItem(i)を実行する。詳細は以下に記載。
+ });
+}
+
+//テーブルの上からi番目のデータを削除する関数deleteItem(i)の詳細。
+function deleteItem(i){
+ var storage = localStorage;
+ var calendar = document.fm.date.value;
+ var item = JSON.parse(storage.getItem(calendar));
+
+ delete item[i];
+
+ //削除後、既にwebストレージに保存したデータをテーブルに表記するため下記2行を記載する必要がある。
+ storage.setItem(calendar,JSON.stringify(item));
+ getlist();
+}
+</script>
+</head>
+<body>
+ <form name="fm">
+  <p>日付<input type="date" name="date"><input id="date_upload" type="button" value="日付の更新"></p>
+  <span>件名</span>
+  <input type="text" name="txt" size="30px">
+  <span id="stime">開始時間</span>
+  <select id="stime_h" name="stime_h">
+   <option></option>
+  </select>
+  <span>時</span>
+  <select id="stime_m" name="stime_m">
+   <option></option>
+  </select>
+  <span>分</span>
+  <span id="ftime">終了時間</span>
+  <select id="ftime_h" name="ftime_h">
+   <option></option>
+  </select>
+  <span>時</span>
+  <select id="ftime_m" name="ftime_m">
+   <option></option>
+  </select>
+  <span>分</span>
+  <span id="rem">備考</span>
+  <input type="text" name="comment">
+  <input id="insert" type="button" value="登録">
+ </form>
+ <table>
+  <caption align="center">スケジュールリスト</caption>
+  <thead>
+   <tr>
+    <td width="40%">件名</td><td width="10%">開始時間</td><td width="10%">終了時間</td><td width="30%">備考</td><td width="5%">編集</td><td width="5%">削除</td>
+   </tr>
+  </thead>
+  <tbody id="data">
+  </tbody>
+ </table>
+</body>
+</html>

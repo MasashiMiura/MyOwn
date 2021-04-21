@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>検索結果</title>
+<style media="screen">
+  body{
+    font-family: serif;
+    background: #000;
+    margin: 0 auto 0 auto;
+  }
+
+  header{
+    width: 63.8vw;
+    margin: 0 auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header a{
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  header > a{
+    text-decoration: underline;
+  }
+
+  #ToTop{
+    width: 50px;
+    height: 50px;
+    background-color: rgba(245,0,0,0.5);
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    cursor: pointer;
+    visibility: hidden;
+  }
+
+  #count{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 63.8vw;
+    margin: 0 auto 0 auto;
+  }
+
+  #count p{
+    color: #fff;
+  }
+
+  #count p span{
+    color: #ee6509;
+    font-size: calc(24/1536 * 100vw);
+  }
+
+  #order_btn input {
+    height: 24px;
+  }
+
+  #result{
+    width: 63.8vw;
+    margin: 0 auto 0 auto;
+  }
+
+  footer{
+    width: 100%;
+    padding-top: calc(42/824 * 100vh);
+    padding-bottom: calc(42/824 * 100vh);
+    background-image: url("../images/Footer.png");
+    background-size: cover;
+    background-position: center center;
+    margin-top: 15.59vh;
+  }
+
+  footer .inner{
+    display: flex;
+    align-items: center;
+  }
+
+  footer .inner img{
+    width: 100%;
+    height: auto;
+  }
+
+  footer .inner div div:nth-of-type(1){
+    margin-left: 10.8vw;
+  }
+
+  #address,#tel{
+    margin-top: 3.47vh;
+    margin-left: 10.8vw;
+  }
+
+  footer .inner p{
+    color: #fff;
+    font-size: calc(12/1536 * 100vw);
+  }
+
+  #footer_nav{
+    display: flex;
+  }
+
+  #footer_nav ul{
+    list-style-type: none;
+  }
+
+  #footer_nav ul li{
+    margin-bottom: 1.15vh;
+  }
+
+  #footer_nav ul li a{
+    color: #fff;
+    font-size: calc(16/1536 * 100vw);
+    text-decoration: none;
+    position: relative;
+  }
+
+  #footer_nav ul li a::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    border-bottom: solid 1px #fff;
+    transition: all .5s ease;
+  }
+
+  #footer_nav ul li a:hover::after{
+    width: 100%;
+  }
+
+  #copyright{
+    margin-left: 13.5vw;
+  }
+</style>
+<script>
+window.addEventListener('load',function(){
+  window.addEventListener('scroll',function(){
+    document.getElementById('ToTop').style.visibility = 'visible';
+  });
+  document.getElementById('ToTop').addEventListener('click',function(){
+    window.scroll({
+      top:0,
+      behavior:'smooth'
+    });
+  });
+});
+</script>
+</head>
+<body>
+  <header>
+    <h1><a href="../index.html"><img src="../images/Logo.png" alt="ロゴ"></a></h1>
+    <a href="!PLANPAGE!">TOPページに戻る</a>
+  </header>
+  <main>
+    <p id="ToTop">topへ</p>
+    <form action="db_search.php" method="post">
+      <div id="count">
+        <p><span>!Count!</span>件のプランが見つかりました。</p>
+        <div id="order_btn">
+          <input type="submit" name="submit" value="おすすめ順">
+          <input type="submit" name="submit" value="料金が安い順">
+          <input type="submit" name="submit" value="料金が高い順">
+        </div>
+      </div>
+      <div id="result">!result!</div>
+      <input type="hidden" name="mode" value="reservation">
+      <input type="hidden" name="date" value="!date!">
+      <input type="hidden" name="num_person" value="!num_person!">
+      <input type="hidden" name="num_stay" value="!num_stay!">
+      <input type="hidden" name="lower_limit" value="!lower_limit!">
+      <input type="hidden" name="upper_limit" value="!upper_limit!">
+      <input type="hidden" name="meal" value="!meal!">
+    </form>
+  </main>
+  <footer>
+    <div class="inner">
+      <div>
+        <div>
+          <a href="../index.html"><img src="../images/Logo.png" alt="ロゴ"></a>
+        </div>
+        <div id="address">
+          <p>〒198-0102</p>
+          <p>東京都西多摩郡奥多摩町1-2-3</p>
+        </div>
+        <div id="tel">
+          <p>TEL. 0428-12-3456</p>
+          <p>受付時間:9:00～20:00</p>
+        </div>
+      </div>
+      <div>
+        <div id="footer_nav">
+          <ul>
+            <li><a href="#">お部屋</a></li>
+            <li><a href="./html/spa.html">温泉</a></li>
+            <li><a href="#">お料理</a></li>
+            <li><a href="./html/facility.html">施設案内</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">アクセス</a></li>
+            <li><a href="#">観光情報</a></li>
+            <li><a href="#">宿泊予約</a></li>
+          </ul>
+        </div>
+        <p id="copyright">Copyright&copy; Miura-Ya Ryokan.All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
