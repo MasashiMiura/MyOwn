@@ -1,0 +1,136 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>宿泊予約者検索</title>
+<style>
+body{
+ background:#f0f0f0;
+}
+#name,#birth,#postal_code,#tel,#rsv_time{
+ font-size:x-small;
+}
+</style>
+<script src="../jquery-3.4.1.min.js"></script>
+<script>
+ $(function(){
+  $('input,select').focus(function(){
+   $(this).css('background-color','#ffc');
+  }).blur(function(){
+   $(this).css('background-color','');
+  });
+ });
+</script>
+</head>
+<body>
+<h1>宿泊予約者検索</h1>
+<form method="POST" action="db_search.php">
+ <table border="1" cellspacing="0">
+  <tr>
+   <td colspan="2">rsv_id(半角入力)</td>
+   <td>
+    <input name="rsv_id" type="text" value="" size="1">
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" rowspan="2">名前(全角入力)</td>
+   <td id="name">全文検索をする場合、苗字と名前にスペースを入れないこと<br>例)宿泊太郎</td>
+  </tr>
+  <tr>
+   <td><input name="name" type="text" value="" size="16"></td>
+  </tr>
+  <tr>
+   <td colspan="2">性別</td>
+   <td>
+   <label><input name="gender" type="radio" value="男">男</label>
+   <label><input name="gender" type="radio" value="女">女</label>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" rowspan="2">生年月日(半角入力)</td>
+   <td id="birth">全文検索をする場合、下記のようなフォーマットにすること<br>例)1970/01/01</td>
+  </tr>
+  <tr>
+   <td><input name="birth" type="text" value="" maxlength="10"></td>
+  </tr>
+  <tr>
+   <td colspan="2" rowspan="2">郵便番号(半角入力)</td>
+   <td id="postal_code">全文検索をする場合、ハイフン(-)を付けること<br>例)123-4567</td>
+  </tr>
+  <tr>
+   <td><input name="postal_code" type="text" value="" size="6" maxlength="8"></td>
+  </tr>
+  <tr>
+   <td colspan="2">住所(全角入力)</td>
+   <td><input name="address" type="text" value="" size="54"></td>
+  </tr>
+  <tr>
+   <td colspan="2" rowspan="2">電話番号(半角入力)</td>
+   <td id="tel">全文検索をする場合、ハイフン(-)を付けること<br>例)090-1234-5678</td>
+  </tr>
+  <tr>
+   <td><input name="tel" type="text" value="" size="16" maxlength="14"></td>
+  </tr>
+  <tr>
+   <td colspan="2">メールアドレス(半角入力)</td>
+   <td><input name="email" type="text" value="" size="28"></td>
+  </tr>
+  <tr>
+   <td colspan="2">宿泊日</td>
+   <td><input name="date" type="date" value=""></td>
+  </tr>
+  <tr>
+   <td colspan="2">チェックイン</td>
+   <td>
+    <select name="checkin">
+     <option></option>
+     <option>14:00</option>
+     <option>15:00</option>
+     <option>16:00</option>
+     <option>17:00</option>
+     <option>18:00</option>
+    </select>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">宿泊数</td>
+   <td>
+   <select name="stay">
+    <option></option>
+    <option>1泊</option>
+    <option>2泊</option>
+    <option>3泊</option>
+    <option>4泊</option>
+    <option>5泊</option>
+    <option>6泊</option>
+    <option>7泊</option>
+   </select>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">お食事プラン</td>
+   <td>
+   <select name="plan">
+    <option></option>
+    <option>朝・夕付き</option>
+    <option>夕のみ</option>
+    <option>朝のみ</option>
+    <option>食事なし</option>
+   </select>
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" rowspan="2">予約完了時間(半角入力)</td>
+   <td id="rsv_time">全文検索をする場合、下記のようなフォーマットにすること<br>例)2019-10-09 01:25:00</td>
+  </tr>
+  <tr>
+   <td><input name="rsv_time" type="text" value="" size="16"></td>
+  </tr>
+  <tr>
+   <td align="center" colspan="3"><input type="submit" value="検索" name="submit"></td>
+  </tr>
+ <input type="hidden" name="mode" value="search" >
+ </table>
+</form>
+</body>
+</html>

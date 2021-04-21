@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>検索結果</title>
+<style type="text/css">
+body{
+ background:#f0f0f0;
+ }
+p span{
+ font-size:x-large;
+ color:orange;
+}
+</style>
+</head>
+<body>
+ <form method="POST" action="db_search.php">
+   <tr>
+     <td>!rsv_id!</td>
+     <td>!name!</td>
+     <td>!gender!</td>
+     <td>!birth!</td>
+     <td>!postal_code!</td>
+     <td>!address!</td>
+     <td>!tel!</td>
+     <td>!email!</td>
+     <td>!date!</td>
+     <td>!checkin!</td>
+     <td>!stay!</td>
+     <td>!plan!</td>
+     <td>!rsv_time!</td>
+     <td><input type="submit" name="status" value="編集"></td>
+     <td><input type="submit" name="status" value="削除"></td>
+   </tr>
+   <input type="hidden" name="mode" value="pre_edition">
+   <input type="hidden" name="rsv_id" value="!rsv_id!">
+ </form>
+</body>
