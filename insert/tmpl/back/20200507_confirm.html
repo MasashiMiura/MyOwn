@@ -1,0 +1,99 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>宿泊者情報の確認</title>
+<style>
+body{
+ background:#f0f0f0;
+}
+</style>
+</head>
+<body>
+<p>予約は完了してません。入力いただいた項目を確認し、<br>
+   問題なければ「完了」ボタンを押してください。</p>
+<form method="POST" action="../insert/db_insert.php">
+ <table border="1" cellspacing="0">
+  <tr>
+   <td colspan="2">名前</td>
+   <td>!familyname! !firstname!</td>
+  </tr>
+  <tr>
+   <td colspan="2">性別</td>
+   <td>!gender!</td>
+  </tr>
+  <tr>
+   <td colspan="2">生年月日</td>
+   <td>!birth_year!年!birth_month!月!birth_day!日</td>
+  </tr>
+  <tr>
+   <td colspan="2">郵便番号</td>
+   <td>〒!postal_code1!‐!postal_code2!</td>
+  </tr>
+  <tr>
+   <td rowspan="3">住所</td>
+   <td>都道府県</td>
+   <td>!prefecture!</td>
+  </tr>
+  <tr>
+   <td>市区町村</td>
+   <td>!city!</td>
+  </tr>
+  <tr>
+   <td>番地以降</td>
+   <td>!area!</td>
+  </tr>
+  <tr>
+   <td colspan="2">電話番号</td>
+   <td>!tel1!‐!tel2!‐!tel3!</td>
+  </tr>
+  <tr>
+   <td colspan="2">メールアドレス</td>
+   <td>!email!</td>
+  </tr>
+  <tr>
+   <td colspan="2">宿泊日</td>
+   <td>!date!</td>
+  </tr>
+  <tr>
+   <td colspan="2">チェックイン</td>
+   <td>!checkin!</td>
+  </tr>
+  <tr>
+   <td colspan="2">宿泊数</td>
+   <td>!stay!</td>
+  </tr>
+  <tr>
+   <td colspan="2">お食事プラン</td>
+   <td>!plan!</td>
+  </tr>
+  <input type="hidden" name="familyname" value="!familyname!">
+  <input type="hidden" name="firstname" value="!firstname!">
+  <input type="hidden" name="gender" value="!gender!">
+  <input type="hidden" name="birth_year" value="!birth_year!">
+  <input type="hidden" name="birth_month" value="!birth_month!">
+  <input type="hidden" name="birth_day" value="!birth_day!">
+  <input type="hidden" name="postal_code1" value="!postal_code1!">
+  <input type="hidden" name="postal_code2" value="!postal_code2!">
+  <input type="hidden" name="prefecture" value="!prefecture!">
+  <input type="hidden" name="city" value="!city!">
+  <input type="hidden" name="area" value="!area!">
+  <input type="hidden" name="tel1" value="!tel1!">
+  <input type="hidden" name="tel2" value="!tel2!">
+  <input type="hidden" name="tel3" value="!tel3!">
+  <input type="hidden" name="email" value="!email!">
+  <input type="hidden" name="date" value="!date!">
+  <input type="hidden" name="checkin" value="!checkin!">
+  <input type="hidden" name="stay" value="!stay!">
+  <input type="hidden" name="plan" value="!plan!">
+  <tr>
+   <td colspan="3">
+   <input type="submit" value="完了" name="submit">
+   <input type="button" value="戻る" onclick="history.back();">
+   </td>
+  </tr>
+  <input type="hidden" name="mode" value="confirm">
+ </table>
+</form>
+</body>
+</html>
