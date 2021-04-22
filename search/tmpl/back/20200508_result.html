@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>検索結果</title>
+<style type="text/css">
+body{
+ background:#f0f0f0;
+ }
+p span{
+ font-size:x-large;
+ color:orange;
+}
+</style>
+</head>
+<body>
+ <form method="POST" action="db_search.php">
+  <p><span>!Count!件</span>見つかりました。</p>
+  <table border="1">
+   <tr>
+    <td>rsv_id</td>
+    <td>name</td>
+    <td>gender</td>
+    <td>birth</td>
+    <td>postal_code</td>
+    <td>address</td>
+    <td>tel</td>
+    <td>email</td>
+    <td>date</td>
+    <td>checkin</td>
+    <td>stay</td>
+    <td>plan</td>
+    <td>rsv_time</td>
+   </tr>
+   !search_result!
+  </table>
+ </form>
+ <a href="!toppage!">TOP PAGE</a>
+</body>

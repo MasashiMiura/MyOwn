@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>宿泊者情報削除前の確認</title>
+<style>
+body{
+ background:#f0f0f0;
+}
+#button{
+ text-align: center;
+}
+</style>
+</head>
+<body>
+<p>下記内容を確認し、問題なければ「削除」をクリックしてください。</p>
+<form method="POST" action="db_search.php">
+ <table border="1" cellspacing="0">
+   <tr>
+    <td>rsv_id</td>
+    <td>!rsv_id!</td>
+   </tr>
+  <tr>
+   <td>名前</td>
+   <td>!name!</td>
+  </tr>
+  <tr>
+   <td>性別</td>
+   <td>!gender!</td>
+  </tr>
+  <tr>
+   <td>生年月日</td>
+   <td>!birth!</td>
+  </tr>
+  <tr>
+   <td>郵便番号</td>
+   <td><span>〒</span>!postal_code!</td>
+  </tr>
+  <tr>
+   <td>住所</td>
+   <td>!address!</td>
+  </tr>
+  <tr>
+   <td>電話番号</td>
+   <td>!tel!</td>
+  </tr>
+  <tr>
+   <td>メールアドレス</td>
+   <td>!email!</td>
+  </tr>
+  <tr>
+   <td>宿泊日</td>
+   <td>!date!</td>
+  </tr>
+  <tr>
+   <td>チェックイン</td>
+   <td>!checkin!</td>
+  </tr>
+  <tr>
+   <td>宿泊数</td>
+   <td>!stay!</td>
+  </tr>
+  <tr>
+   <td>お食事プラン</td>
+   <td>!plan!</td>
+  </tr>
+  <input type="hidden" name="rsv_id" value="!rsv_id!">
+  <tr>
+   <td id="button" colspan="2">
+    <input type="submit" value="削除" name="submit">
+    <input type="button" value="戻る" onclick="history.back();">
+   </td>
+  </tr>
+  <input type="hidden" name="mode" value="delete">
+ </table>
+</form>
+</body>
+</html>

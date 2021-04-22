@@ -1,0 +1,158 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>新宿大学公式サイト</title>
+<link rel="stylesheet" href="../css/complete.css">
+<script>
+window.addEventListener('load',function(){
+ var toTop = document.querySelector('.scrollTop');
+ toTop.style.visibility = 'hidden';
+ window.addEventListener('scroll',function(){
+  var vision = document.querySelector('#requireInner > p:nth-of-type(1)');
+  var toTop = document.querySelector('.scrollTop');
+  if(window.innerHeight > vision.getBoundingClientRect().top + 300){
+   toTop.style.visibility = 'visible';
+  }
+  else{
+   toTop.style.visibility = 'hidden';
+  }
+  toTop.addEventListener('click',function(){
+   window.scroll({
+    top:0,
+    behavior:'smooth'
+   });
+  });
+ });
+});
+</script>
+</head>
+<body>
+ <header>
+  <p class="scrollTop">TOPへ<br>戻る</p>
+  <div id="headerInner">
+   <h1><a href="../index.html"><img src="../images/logo.png" alt="ロゴ"><span>新宿大学</span></a></h1>
+   <nav id="nav1">
+    <ul class="dropdown">
+     <li>
+      対象者別▼
+      <ul>
+       <li><a href="#">受験生の方</a></li>
+       <li><a href="#">在学生の方</a></li>
+       <li><a href="#">卒業生の方</a></li>
+       <li><a href="#">保護者の方</a></li>
+       <li><a href="#">企業の方</a></li>
+       <li><a href="#">メディアの方</a></li>
+      </ul>
+     </li>
+     <li>
+      施設案内
+      <ul>
+       <li><a href="#">大学本部</a></li>
+       <li><a href="#">1号館～15号館</a></li>
+       <li><a href="#">図書館</a></li>
+       <li><a href="#">体育館/総合グラウンド</a></li>
+       <li><a href="#">食堂</a></li>
+       <li><a href="#">メインホール</a></li>
+       <li><a href="#">就職キャリアセンター</a></li>
+       <li><a href="#">心理相談所</a></li>
+      </ul>
+     </li>
+     <li>
+      アクセス
+      <ul>
+       <li><a href="#">アクセスマップ</a></li>
+      </ul>
+     </li>
+     <li>
+      資料請求
+      <ul>
+       <li><a href="../html/require.html">WEBから</a></li>
+       <li><a href="#">お電話から</a></li>
+      </ul>
+     </li>
+    </ul>
+   </nav>
+  </div>
+ </header>
+ <main>
+  <div class="require_bg"></div>
+  <div id="requireInner">
+   <div class="heading">
+    <h2>資料請求入力フォーム</h2>
+    <p><a href="../index.html">HOME</a>ー<span>資料請求ーWEBから</span></p>
+   </div>
+   <div class="step">
+    <ul>
+     <li>01.お取り寄せ情報入力</li>
+     <li>02.入力情報の確認</li>
+     <li>03.送信完了</li>
+    </ul>
+   </div>
+   <p>送信完了しました。ありがとうございました。</p>
+   <hr>
+   <p>ご希望の資料につきましては1週間以内に郵送致します。<br>
+      1週間以上経っても資料が届かない場合は恐れ入りますが、直接お電話にてご確認お願い致します。
+   </p>
+   <a href="../tmpl/!toppage!">資料請求入力フォームへ戻る</a>
+  </div>
+ </main>
+ <footer>
+  <div id="footerInner">
+   <div id="logo_f">
+    <a href="../index.html"><img src="../images/logo.png" alt="ロゴ"><span>新宿大学</span></a>
+    <div id="banner">
+     <a href="#"><img id="Facebook" src="../images/facebook_banner.png" alt="Facebook"></a>
+     <a href="#"><img id="Messanger" src="../images/messenger_banner.png" alt="Messenger"></a>
+    </div>
+   </div>
+   <div id="banner_smapho">
+    <a href="#"><img id="Facebook_smapho" src="../images/facebook_banner.png" alt="Facebook"></a>
+    <a href="#"><img id="Meesenger_smapho" src="../images/messenger_banner.png" alt="Messenger"></a>
+   </div>
+    <nav id="nav3">
+     <ul>
+      <li><a href="../html/feature.html">大学の特色</a></li>
+      <li><a href="#">学部・学科一覧</a></li>
+      <li><a href="#">大学院一覧</a></li>
+      <li><a href="#">施設一覧</a></li>
+      <li><a href="#">アクセス</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">サークル活動</a></li>
+      <li><a href="#">留学</a></li>
+      <li><a href="#">国際交流</a></li>
+      <li><a href="#">心理相談</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">進路相談</a></li>
+      <li><a href="#">就職情報</a></li>
+      <li><a href="#">インターンシップ</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">学部入試情報</a></li>
+      <li><a href="#">大学院入試情報</a></li>
+     </ul>
+     <ul>
+      <li><a href="#">受験生の方</a></li>
+      <li><a href="#">在学生の方</a></li>
+      <li><a href="#">卒業生の方</a></li>
+      <li><a href="#">保護者の方</a></li>
+      <li><a href="#">企業の方</a></li>
+      <li><a href="#">メディアの方</a></li>
+     </ul>
+    </nav>
+    <div id="footer_inner">
+     <p><a href="#">採用情報</a></p>
+     <p><a href="../html/require.html">資料請求</a></p>
+     <p><a href="#">お問い合わせ</a></p>
+    </div>
+    <div id="footer_inner2">
+     <p><a href="#">このサイトについて</a></p>
+     <p><a href="#">プライバシーポリシー</a></p>
+    </div>
+    <p id="Copyright">Copyright&copy; Shinjuku University.All rights reserved.</p>
+  </div>
+ </footer>
+</body>
+</html>

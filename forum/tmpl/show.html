@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+body{
+ background-color: #f5deb3;
+}
+
+#datetime,#title{
+ margin-left: 15px;
+}
+#comment{
+ margin-left: 30px;
+}
+</style>
+</head>
+<body>
+ <form action="forum.php" method="post">
+  <hr>
+  <div>
+   <span>!num!</span>
+   <span id="datetime">日時:!datetime!</span>
+   <span id="title">タイトル:!title!</span>
+  </div>
+  <div>
+   <span>!reply_id!</span>
+   <span id="comment">!comment!</span>
+  </div>
+  <input type="submit" value="返信する">
+  <input type="hidden" name="mode" value="reply">
+  <input type="hidden" name="num" value="!num!">
+ </form>
+</body>
+</html>

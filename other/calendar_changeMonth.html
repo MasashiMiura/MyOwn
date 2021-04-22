@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style media="screen">
+ #calendar{
+  /*display: flex;*/
+  flex-wrap: wrap;
+ }
+
+ td{
+  border: solid 1px #000;
+  text-align: center;
+ }
+
+ td:first-child{
+  color: red;
+ }
+
+ td:last-child{
+  color: blue;
+ }
+</style>
+<script type="text/javascript">
+window.addEventListener('load',function(){
+ var date = new Date();
+ var year = date.getFullYear();
+ var month = date.getMonth() + 1;
+
+ showCalendar(year, month);
+ document.querySelector('#prev').addEventListener('click', toPreviousMonth);
+ document.querySelector('#next').addEventListener('click', toNextMonth);
+
+ function showCalendar(year, month){
+  var today = new Date().getDate();
+  var startDate = new Date(year, month - 1, 1); // 月の最初の日を取得
+  var endDate = new Date(year, month,  0); // 月の最後の日を取得
+  var endDayCount = endDate.getDate(); // 月の末日
+  var startDay = startDate.getDay(); // 月の最初の日の曜日を取得
+  var weeks = ['日', '月', '火', '水', '木', '金', '土'];
+  var dayCount = 1; // 日にちのカウント
+  var calendarHtml = ''; // HTMLを組み立てる変数
+
+  calendarHtml += '<h1>' + year  + '年' + month + '月' + '</h1>';
+  calendarHtml += '<table border="1" cellspacing="0">';
+
+  // 曜日の行を作成
+  for(var i = 0; i < weeks.length; i++){
+   calendarHtml += '<td>' + weeks[i] + '</td>';
+  }
+
+  for(var w = 0; w < 6; w++){
+   calendarHtml += '<tr>';
+   for(var d = 0; d < 7; d++){
+    if((w == 0 && d < startDay) || (dayCount > endDayCount)){
+     calendarHtml += '<td></td>';
+    }
+    else if(today == dayCount){
+     calendarHtml += '<td bgcolor="orange">' + dayCount + '</td>';
+     dayCount++;
+    }
+    else{
+     calendarHtml += '<td>' + dayCount + '</td>';
+     dayCount++;
+    }
+   }
+   calendarHtml += '</tr>';
+  }
+  calendarHtml += '</table>';
+  document.querySelector('#calendar').innerHTML = calendarHtml;
+ }
+
+ function toPreviousMonth(){
+  month--;
+  if(month < 1){
+    year--;
+    month = 12;
+  }
+  showCalendar(year, month);
+ }
+
+ function toNextMonth(){
+  month++;
+  if(month > 12){
+   year++;
+   month = 1;
+  }
+  showCalendar(year, month);
+ }
+});
+</script>
+</head>
+<body>
+ <button id="prev" type="button">前の月</button>
+ <button id="next" type="button">次の月</button>
+ <div id="calendar"></div>
+</body>
+</html>
